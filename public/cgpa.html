@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
+    <style>
+        /* Modernized styles */
+        .logout-btn {
+    position: fixed; /* Change from absolute to fixed */
+    top: 15px;
+    left: 15px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px; /* Slightly smaller */
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+
+        .logout-btn:hover {
+            background-color: #c0392b; /* Darker red on hover */
+        }
+
+        .logout-btn i {
+            font-size: 14px; /* Icon size */
+        }
+
+        .calculator-box {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #2c3e50; /* Darker text color */
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #7f8c8d; /* Subtle gray text */
+            margin-bottom: 20px;
+        }
+
+        .btn button {
+            width: auto;
+            margin: 10px 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #3498db; /* Blue primary color */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        .lastp {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2ecc71; /* Green for CGPA result */
+        }
+
+        .course-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .course-row strong {
+            flex: 1;
+            text-align: center;
+            font-size: 14px;
+            color: #34495e; /* Darker gray */
+        }
+
+        .course-row input,
+        .course-row select {
+            flex: 2;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-box">
+        <!-- Logout Button -->
+        <a href="/logout">
+            <button class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </a>
+
+        <h1>CGPA CALCULATOR</h1>
+        <p id="welcome-message">Welcome!</p> <!-- Placeholder for the welcome message -->
+
+        <p>
+          This CGPA Calculator is based on the Ibadan City Polytechnic grading system.
+        </p>
+
+        <div id="course-wrapper">
+            <div class="course-row key-0">
+                <strong>Course Code</strong>
+                <strong>Credit Units</strong>
+                <strong>Grades</strong>
+            </div>
+            <div class="course-row key-0">
+                <input 
+                    type="text" 
+                    class="courses key-0" 
+                    placeholder="Course Code" 
+                    maxlength="8" 
+                    oninput="validateCourseCode(this)" 
+                    required 
+                />
+                <input 
+                    type="number" 
+                    class="credit-units key-0" 
+                    placeholder="Credit Units" 
+                    maxlength="2" 
+                    oninput="validateCreditUnits(this)" 
+                    required 
+                />
+                <select class="grade key-0" required>
+                    <option value="select">Select</option>
+                    <option value="4">A (70-100)</option>
+                    <option value="3">B (60-69)</option>
+                    <option value="2">C (50-59)</option>
+                    <option value="1">D (45-49)</option>
+                    <option value="0">F (0-44)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="btn">
+          <button onclick="addCourse()">+ Add Course</button>
+          <button onclick="removeCourse()">- Remove Course</button>
+          <button onclick="calcCgpa()">Calculate CGPA</button>
+        </div>
+        <div class="lastp">
+          <p id="cgpa-calc">Your CGPA is:</p>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Font Awesome for icons -->
+    <script src="script.js"></script> <!-- Link to the JavaScript file -->
+    <script>
+        // Validate Course Code to ensure it only allows 8 characters
+        function validateCourseCode(input) {
+            if (input.value.length > 8) {
+                input.value = input.value.slice(0, 8); // Trim to 8 characters
+            }
+        }
+
+        // Validate Credit Units to ensure it only allows numbers and a max length of 2
+        function validateCreditUnits(input) {
+            if (input.value.length > 2) {
+                input.value = input.value.slice(0, 2); // Trim to 2 characters
+            }
+        }
+    </script>
+</body>
+</html>
