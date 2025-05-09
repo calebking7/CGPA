@@ -29,6 +29,22 @@ app.get("/", (req, res) => {
   }
 });
 
+app.get("/signup", (req, res) => {
+  if (req.session.user) {
+    res.sendFile(__dirname + "/public/cgpa.html");
+  } else {
+    res.sendFile(__dirname + "/public/signup.html");
+  }
+});
+
+app.get("/cgpa", (req, res) => {
+  if (req.session.user) {
+    res.sendFile(__dirname + "/public/cgpa.html");
+  } else {
+    res.redirect("/");
+  }
+});
+
 app.post("/signup", (req, res) => {
   const { username, password } = req.body;
   if (users[username]) {
