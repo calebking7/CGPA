@@ -45,6 +45,14 @@ app.get("/cgpa", (req, res) => {
   }
 });
 
+// Style route and script route
+app.get("/style.css", (req, res) => {
+  res.sendFile(__dirname + "/public/style.css");
+});
+app.get("/script.js", (req, res) => {
+  res.sendFile(__dirname + "/public/script.js");
+});
+
 app.post("/signup", (req, res) => {
   const { username, password } = req.body;
   if (users[username]) {
