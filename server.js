@@ -53,6 +53,13 @@ app.get("/script.js", (req, res) => {
   res.sendFile(__dirname + "/public/script.js");
 });
 
+// Logo route
+app.get("/logo.png", (req, res) => {
+  res.sendFile(__dirname + "/public/logo.png");
+});
+
+// Api routes
+
 app.post("/signup", (req, res) => {
   const { username, password } = req.body;
   if (users[username]) {
